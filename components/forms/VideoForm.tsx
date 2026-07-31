@@ -5,20 +5,23 @@ import { ChevronLeft, ChevronRight, Send } from "lucide-react";
 import { sendWhatsApp } from "@/lib/whatsapp";
 
 const VIDEO_TYPES = [
-  "YouTube",
-  "TikTok",
-  "Instagram Reels",
-  "Gaming",
-  "Company Profile",
-  "Wedding",
+  "Edukasi",
+  "Vlog",
+  "Dokumenter",
+  "Short Content",
+  "Podcast",
+  "Cinematic",
+  "Promosi/Iklan",
+  "Dokumentasi Acara",
   "After Movie",
+  "Konten Produk",
   "Lainnya",
 ];
 
 const PACKAGES = [
   "Basic",
-  "Standard",
-  "Premium",
+  "Pro",
+  "Ultimate",
   "Custom",
 ];
 
