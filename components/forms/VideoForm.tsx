@@ -15,6 +15,7 @@ const VIDEO_TYPES = [
   "Dokumentasi Acara",
   "After Movie",
   "Konten Produk",
+  "Film Pendek",
   "Lainnya",
 ];
 
