@@ -21,7 +21,7 @@ export function sendWhatsApp({ data }: WhatsAppData) {
 ${data["Request/Catatan Tambahan"] || "-"}
 *Add On*: ${data["Add On"] || "-"}
 
-Setelah kamu mengisi form ini, maka kami akan mengirimkan perkiraan biaya jasa editing kami✨`;
+Saya tunggu estimasi biayanya ya min~`;
 
   const whatsappUrl =
     `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`;

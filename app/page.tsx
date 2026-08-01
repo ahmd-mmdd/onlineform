@@ -127,7 +127,7 @@ export default function Home() {
                   className="btn btn-outline"
                   onClick={() => {
                     window.location.href =
-                      "https://www.instagram.com/stories/highlights/18049683641404371/";
+                      "https://asa-info.vercel.app";
                   }}
                 >
                   Belum
