@@ -25,6 +25,12 @@ const PACKAGES = [
   "Ultimate",
 ];
 
+const ADD_ONS = [
+  "Subtitle",
+  "Fast Track",
+  "Voice Over",
+];
+
 export default function VideoForm() {
   const [step, setStep] = useState(1);
 
@@ -43,6 +49,17 @@ export default function VideoForm() {
   const [reference, setReference] = useState("");
   const [driveLink, setDriveLink] = useState("");
   const [notes, setNotes] = useState("");
+
+  // Add On
+  const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
+
+  const toggleAddOn = (addon: string) => {
+    setSelectedAddOns((prev) =>
+      prev.includes(addon)
+        ? prev.filter((item) => item !== addon)
+        : [...prev, addon]
+    );
+  };
 
   const nextStep = () => {
     if (step === 1) {
@@ -73,7 +90,7 @@ export default function VideoForm() {
         {/* HEADER */}
         <div>
           <h2 className="text-3xl font-black">
-            🎬 Edit Video
+             Edit Video
           </h2>
 
           <p className="opacity-70 mt-2">
@@ -347,6 +364,48 @@ export default function VideoForm() {
               />
             </div>
 
+            {/* ADD ON */}
+            <div>
+              <label className="label">
+                <span className="label-text font-semibold">
+                  Add On
+                </span>
+
+                <span className="label-text-alt opacity-60">
+                  Bisa pilih lebih dari satu
+                </span>
+              </label>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {ADD_ONS.map((addon) => {
+                  const isSelected = selectedAddOns.includes(addon);
+
+                  return (
+                    <button
+                      key={addon}
+                      type="button"
+                      onClick={() => toggleAddOn(addon)}
+                      className={`card border transition-all ${
+                        isSelected
+                          ? "border-primary bg-primary text-primary-content"
+                          : "border-base-300 bg-base-100 hover:border-primary"
+                      }`}
+                    >
+                      <div className="card-body p-4 items-center">
+                        <p className="font-semibold text-center">
+                          {addon}
+                        </p>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <p className="text-sm opacity-60 mt-2">
+                Pilih add on yang kamu butuhkan.
+              </p>
+            </div>
+
           </div>
         )}
 
@@ -368,6 +427,7 @@ export default function VideoForm() {
 
                 <div className="space-y-4">
 
+                  {/* NAMA */}
                   <div className="flex justify-between gap-4">
                     <span className="opacity-70">
                       Nama
@@ -378,6 +438,7 @@ export default function VideoForm() {
                     </span>
                   </div>
 
+                  {/* WHATSAPP */}
                   <div className="flex justify-between gap-4">
                     <span className="opacity-70">
                       Nomor WhatsApp
@@ -388,6 +449,7 @@ export default function VideoForm() {
                     </span>
                   </div>
 
+                  {/* PAKET */}
                   <div className="flex justify-between gap-4">
                     <span className="opacity-70">
                       Paket
@@ -398,6 +460,7 @@ export default function VideoForm() {
                     </span>
                   </div>
 
+                  {/* JENIS VIDEO */}
                   <div className="flex justify-between gap-4">
                     <span className="opacity-70">
                       Jenis Video
@@ -408,6 +471,7 @@ export default function VideoForm() {
                     </span>
                   </div>
 
+                  {/* DURASI */}
                   <div className="flex justify-between gap-4">
                     <span className="opacity-70">
                       Durasi
@@ -418,6 +482,7 @@ export default function VideoForm() {
                     </span>
                   </div>
 
+                  {/* DEADLINE */}
                   <div className="flex justify-between gap-4">
                     <span className="opacity-70">
                       Deadline
@@ -428,6 +493,7 @@ export default function VideoForm() {
                     </span>
                   </div>
 
+                  {/* KONSEP */}
                   <div>
                     <p className="font-semibold mb-1">
                       Konsep Video
@@ -438,6 +504,7 @@ export default function VideoForm() {
                     </p>
                   </div>
 
+                  {/* REFERENSI */}
                   <div>
                     <p className="font-semibold mb-1">
                       Referensi
@@ -448,6 +515,7 @@ export default function VideoForm() {
                     </p>
                   </div>
 
+                  {/* GOOGLE DRIVE */}
                   <div>
                     <p className="font-semibold mb-1">
                       Google Drive
@@ -458,6 +526,7 @@ export default function VideoForm() {
                     </p>
                   </div>
 
+                  {/* REQUEST */}
                   <div>
                     <p className="font-semibold mb-1">
                       Request / Catatan Tambahan
@@ -466,6 +535,30 @@ export default function VideoForm() {
                     <p className="opacity-70 whitespace-pre-wrap">
                       {notes || "-"}
                     </p>
+                  </div>
+
+                  {/* ADD ON */}
+                  <div>
+                    <p className="font-semibold mb-1">
+                      Add On
+                    </p>
+
+                    {selectedAddOns.length > 0 ? (
+                      <div className="flex flex-wrap gap-2">
+                        {selectedAddOns.map((addon) => (
+                          <span
+                            key={addon}
+                            className="badge badge-primary"
+                          >
+                            {addon}
+                          </span>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="opacity-70">
+                        Tidak ada
+                      </p>
+                    )}
                   </div>
 
                 </div>
@@ -491,6 +584,7 @@ export default function VideoForm() {
 
         <div className="flex justify-between gap-3">
 
+          {/* BACK */}
           <button
             type="button"
             className="btn btn-outline"
@@ -501,6 +595,7 @@ export default function VideoForm() {
             Kembali
           </button>
 
+          {/* NEXT */}
           {step < 3 ? (
             <button
               type="button"
@@ -528,6 +623,10 @@ export default function VideoForm() {
                     Referensi: reference,
                     "Google Drive": driveLink,
                     "Request/Catatan Tambahan": notes,
+                    "Add On":
+                      selectedAddOns.length > 0
+                        ? selectedAddOns.join(", ")
+                        : "-",
                   },
                 })
               }

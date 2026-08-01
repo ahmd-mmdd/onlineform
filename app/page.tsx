@@ -49,6 +49,13 @@ export default function Home() {
   const [started, setStarted] = useState(false);
   const [service, setService] = useState("");
 
+  // Popup Term & Condition
+  const [showTermsPopup, setShowTermsPopup] = useState(true);
+
+  // ==========================================
+  // HALAMAN FORM
+  // ==========================================
+
   if (service) {
     return (
       <main className="min-h-screen bg-base-100 py-10 px-5">
@@ -68,8 +75,76 @@ export default function Home() {
     );
   }
 
+  // ==========================================
+  // LANDING PAGE
+  // ==========================================
+
   return (
     <main className="min-h-screen bg-base-100">
+
+      {/* ======================================
+          POPUP TERM & CONDITION
+      ====================================== */}
+
+      {showTermsPopup && (
+        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/70 backdrop-blur-sm px-5">
+
+          <div className="card w-full max-w-md bg-base-100 border border-base-300 shadow-2xl">
+
+            <div className="card-body text-center">
+
+              {/* ICON */}
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-warning/15 text-3xl">
+                ⚠️
+              </div>
+
+              {/* TITLE */}
+              <h2 className="text-2xl font-black mt-2">
+                Sebelum Order
+              </h2>
+
+              {/* DESCRIPTION */}
+              <p className="text-base-content/70 leading-relaxed mt-2">
+                Sebelum melakukan order, pastikan Anda telah
+                membaca <strong>Term & Condition</strong> kami.
+              </p>
+
+              {/* BUTTON */}
+              <div className="grid grid-cols-2 gap-3 mt-6">
+
+                {/* SUDAH */}
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => setShowTermsPopup(false)}
+                >
+                  Sudah
+                </button>
+
+                {/* BELUM */}
+                <button
+                  type="button"
+                  className="btn btn-outline"
+                  onClick={() => {
+                    window.location.href =
+                      "https://www.instagram.com/stories/highlights/18049683641404371/";
+                  }}
+                >
+                  Belum
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      )}
+
+      {/* ======================================
+          HERO
+      ====================================== */}
 
       {!started ? (
         <section className="hero min-h-screen">
@@ -83,11 +158,13 @@ export default function Home() {
               </div>
 
               <h1 className="text-6xl md:text-7xl font-black">
-                Asa Digital Space 
+                Asa Digital Space
               </h1>
 
               <p className="text-xl mt-6 opacity-80">
-                Dream, Imagine, and Make it True! Kami menyediakan berbagai layanan kreasi digital seperti Videografi, Fotografi, Desain, dan lain lain.
+                Dream, Imagine, and Make it True! Kami menyediakan
+                berbagai layanan kreasi digital seperti Videografi,
+                Fotografi, Desain, dan lain lain.
               </p>
 
               <p className="opacity-60 mt-4">
@@ -108,6 +185,11 @@ export default function Home() {
 
         </section>
       ) : (
+
+        // ======================================
+        // PILIHAN LAYANAN
+        // ======================================
+
         <section className="py-16">
 
           <div className="max-w-6xl mx-auto px-5">
@@ -151,16 +233,18 @@ export default function Home() {
 
                     <div className="card-body">
 
-                      <div className="
-                        w-16
-                        h-16
-                        rounded-2xl
-                        bg-primary
-                        text-primary-content
-                        flex
-                        items-center
-                        justify-center
-                      ">
+                      <div
+                        className="
+                          w-16
+                          h-16
+                          rounded-2xl
+                          bg-primary
+                          text-primary-content
+                          flex
+                          items-center
+                          justify-center
+                        "
+                      >
                         <Icon size={34} />
                       </div>
 
@@ -197,6 +281,7 @@ export default function Home() {
           </div>
 
         </section>
+
       )}
 
     </main>
