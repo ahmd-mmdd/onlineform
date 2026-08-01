@@ -5,7 +5,7 @@ type WhatsAppData = {
 
 const PHONE_NUMBER = "6285731053237";
 
-export function sendWhatsApp({ service, data }: WhatsAppData) {
+export function sendWhatsApp({ data }: WhatsAppData) {
   const message = `✨*Form reservasi jasa edit by AsaDigitals*📋
 
 *Nama*: ${data.Nama || "-"}
@@ -22,9 +22,8 @@ ${data["Request/Catatan Tambahan"] || "-"}
 
 Setelah kamu mengisi form ini, maka kami akan mengirimkan perkiraan biaya jasa editing kami✨`;
 
-  const url = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(
-    message
-  )}`;
+  const whatsappUrl =
+    `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`;
 
-  window.open(url, "_blank");
+  window.location.href = whatsappUrl;
 }
