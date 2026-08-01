@@ -19,6 +19,7 @@ export function sendWhatsApp({ data }: WhatsAppData) {
 *Google Drive*: ${data["Google Drive"] || "-"}
 *Request/Catatan Tambahan*:
 ${data["Request/Catatan Tambahan"] || "-"}
+*Add On*: ${data["Add On"] || "-"}
 
 Setelah kamu mengisi form ini, maka kami akan mengirimkan perkiraan biaya jasa editing kami✨`;
 

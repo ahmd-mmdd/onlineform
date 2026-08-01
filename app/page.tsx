@@ -100,7 +100,7 @@ export default function Home() {
 
               {/* TITLE */}
               <h2 className="text-2xl font-black mt-2">
-                Sebelum Order
+                PERINGATAN
               </h2>
 
               {/* DESCRIPTION */}
