@@ -58,11 +58,40 @@ export default function Home() {
 
   if (service) {
     return (
-      <main className="min-h-screen bg-base-100 py-10 px-5">
-        <div className="mx-auto max-w-4xl">
+      <main className="min-h-screen overflow-hidden bg-[#062b63] text-white">
+
+        {/* BACKGROUND */}
+
+        <div className="fixed inset-0 -z-0 overflow-hidden">
+
+          <div className="absolute inset-0 bg-gradient-to-br from-[#062b63] via-[#073e87] to-[#00c9d8]" />
+
+          <div className="absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-cyan-400/20 blur-[120px]" />
+
+          <div className="absolute -right-40 top-[35%] h-[600px] w-[600px] rounded-full bg-blue-500/30 blur-[140px]" />
+
+          <div className="absolute bottom-[-200px] left-[20%] h-[500px] w-[500px] rounded-full bg-cyan-400/20 blur-[130px]" />
+
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-4xl px-5 py-10">
 
           <button
-            className="btn btn-ghost mb-6"
+            className="
+              mb-6
+              rounded-xl
+              border
+              border-white/20
+              bg-white/10
+              px-5
+              py-3
+              text-sm
+              font-semibold
+              text-white
+              backdrop-blur-md
+              transition
+              hover:bg-white/20
+            "
             onClick={() => setService("")}
           >
             ← Kembali
@@ -71,6 +100,7 @@ export default function Home() {
           <OrderForm service={service} />
 
         </div>
+
       </main>
     );
   }
@@ -80,209 +110,407 @@ export default function Home() {
   // ==========================================
 
   return (
-    <main className="min-h-screen bg-base-100">
+    <main className="min-h-screen overflow-hidden bg-[#062b63] text-white">
 
       {/* ======================================
-          POPUP TERM & CONDITION
+          BACKGROUND
       ====================================== */}
 
-      {showTermsPopup && (
-        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/70 backdrop-blur-sm px-5">
+      <div className="fixed inset-0 -z-0 overflow-hidden">
 
-          <div className="card w-full max-w-md bg-base-100 border border-base-300 shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#062b63] via-[#073e87] to-[#00c9d8]" />
 
-            <div className="card-body text-center">
+        <div className="absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-cyan-400/20 blur-[120px]" />
 
-              {/* ICON */}
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-warning/15 text-3xl">
-                ⚠️
-              </div>
+        <div className="absolute -right-40 top-[35%] h-[600px] w-[600px] rounded-full bg-blue-500/30 blur-[140px]" />
 
-              {/* TITLE */}
-              <h2 className="text-2xl font-black mt-2">
-                PERINGATAN
-              </h2>
+        <div className="absolute bottom-[-200px] left-[20%] h-[500px] w-[500px] rounded-full bg-cyan-400/20 blur-[130px]" />
 
-              {/* DESCRIPTION */}
-              <p className="text-base-content/70 leading-relaxed mt-2">
-                Sebelum melakukan order, pastikan Anda telah
-                membaca <strong>Term & Condition</strong> kami.
-              </p>
+      </div>
 
-              {/* BUTTON */}
-              <div className="grid grid-cols-2 gap-3 mt-6">
+      <div className="relative z-10">
 
-                {/* SUDAH */}
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={() => setShowTermsPopup(false)}
+        {/* ======================================
+            POPUP TERM & CONDITION
+        ====================================== */}
+
+        {showTermsPopup && (
+          <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/70 px-5 backdrop-blur-md">
+
+            <div
+              className="
+                w-full
+                max-w-md
+                rounded-[2rem]
+                border-2
+                border-white/30
+                bg-white/[0.12]
+                p-1
+                shadow-[0_25px_80px_rgba(0,0,0,0.35)]
+                backdrop-blur-2xl
+              "
+            >
+
+              <div className="rounded-[1.7rem] p-7 text-center md:p-9">
+
+                {/* ICON */}
+
+                <div
+                  className="
+                    mx-auto
+                    flex
+                    h-16
+                    w-16
+                    items-center
+                    justify-center
+                    rounded-2xl
+                    border
+                    border-white/20
+                    bg-white/10
+                    text-3xl
+                  "
                 >
-                  Sudah
-                </button>
+                  ⚠️
+                </div>
 
-                {/* BELUM */}
-                <button
-                  type="button"
-                  className="btn btn-outline"
-                  onClick={() => {
-                    window.location.href =
-                      "https://asa-info.vercel.app";
-                  }}
-                >
-                  Belum
-                </button>
+                {/* TITLE */}
+
+                <h2 className="mt-5 text-2xl font-black uppercase tracking-wide">
+                  Peringatan
+                </h2>
+
+                {/* DESCRIPTION */}
+
+                <p className="mt-4 text-sm leading-relaxed text-white/75 md:text-base">
+                  Sebelum melakukan order, pastikan Anda telah
+                  membaca{" "}
+                  <strong className="text-white">
+                    Term & Condition
+                  </strong>{" "}
+                  kami.
+                </p>
+
+                {/* BUTTON */}
+
+                <div className="mt-7 grid grid-cols-2 gap-3">
+
+                  {/* SUDAH */}
+
+                  <button
+                    type="button"
+                    className="
+                      rounded-xl
+                      bg-white
+                      px-5
+                      py-3
+                      font-bold
+                      text-[#073e87]
+                      transition
+                      hover:-translate-y-0.5
+                      hover:bg-white/90
+                    "
+                    onClick={() => setShowTermsPopup(false)}
+                  >
+                    Sudah
+                  </button>
+
+                  {/* BELUM */}
+
+                  <button
+                    type="button"
+                    className="
+                      rounded-xl
+                      border
+                      border-white/30
+                      bg-white/10
+                      px-5
+                      py-3
+                      font-bold
+                      text-white
+                      backdrop-blur-md
+                      transition
+                      hover:bg-white/20
+                    "
+                    onClick={() => {
+                      window.location.href =
+                        "https://asa-info.vercel.app";
+                    }}
+                  >
+                    Belum
+                  </button>
+
+                </div>
 
               </div>
 
             </div>
 
           </div>
+        )}
 
-        </div>
-      )}
+        {/* ======================================
+            HERO
+        ====================================== */}
 
-      {/* ======================================
-          HERO
-      ====================================== */}
+        {!started ? (
 
-      {!started ? (
-        <section className="hero min-h-screen">
+          <section className="flex min-h-screen items-center justify-center px-5 py-20">
 
-          <div className="hero-content text-center">
+            <div className="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
 
-            <div className="max-w-2xl">
+              {/* LABEL */}
 
-              <div className="badge badge-primary badge-lg mb-6">
+              <div
+                className="
+                  mb-7
+                  rounded-full
+                  border
+                  border-white/25
+                  bg-white/10
+                  px-5
+                  py-2
+                  text-xs
+                  font-bold
+                  tracking-[0.3em]
+                  text-white/90
+                  backdrop-blur-md
+                "
+              >
                 ORDER FORM
               </div>
 
-              <h1 className="text-6xl md:text-7xl font-black">
+              {/* TITLE */}
+
+              <h1
+                className="
+                  w-full
+                  text-5xl
+                  font-black
+                  leading-tight
+                  tracking-tight
+                  sm:text-6xl
+                  md:text-7xl
+                "
+              >
                 Asa Digital Space
               </h1>
 
-              <p className="text-xl mt-6 opacity-80">
-                Dream, Imagine, and Make it True! Kami menyediakan
-                berbagai layanan kreasi digital seperti Videografi,
-                Fotografi, Desain, dan lain lain.
+              {/* DESCRIPTION */}
+
+              <p className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-white/80 md:text-xl">
+                Dream, Imagine, and Make it True!
+                Kami menyediakan berbagai layanan kreasi
+                digital seperti Videografi, Fotografi, Desain,
+                dan lain lain.
               </p>
 
-              <p className="opacity-60 mt-4">
+              {/* TAGLINE */}
+
+              <p className="mt-5 text-sm font-semibold tracking-wide text-white/60 md:text-base">
                 Cepat • Berkualitas • Terpercaya
               </p>
 
+              {/* BUTTON */}
+
               <button
-                className="btn btn-primary btn-lg mt-10"
+                className="
+                  mt-10
+                  flex
+                  items-center
+                  gap-3
+                  rounded-2xl
+                  bg-white
+                  px-7
+                  py-4
+                  text-base
+                  font-black
+                  text-[#073e87]
+                  shadow-[0_15px_40px_rgba(0,0,0,0.2)]
+                  transition-all
+                  duration-300
+                  hover:-translate-y-1
+                  hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)]
+                "
                 onClick={() => setStarted(true)}
               >
                 Buat Pesanan
+
                 <ArrowRight size={20} />
+
               </button>
 
             </div>
 
-          </div>
+          </section>
 
-        </section>
-      ) : (
+        ) : (
 
-        // ======================================
-        // PILIHAN LAYANAN
-        // ======================================
+          // ======================================
+          // PILIHAN LAYANAN
+          // ======================================
 
-        <section className="py-16">
+          <section className="min-h-screen px-5 py-20">
 
-          <div className="max-w-6xl mx-auto px-5">
+            <div className="mx-auto max-w-6xl">
 
-            <div className="text-center mb-14">
+              {/* HEADER */}
 
-              <h2 className="text-5xl font-black">
-                Pilih Layanan
-              </h2>
+              <div className="mb-14 text-center">
 
-              <p className="opacity-70 mt-3">
-                Pilih layanan yang ingin kamu pesan.
-              </p>
+                <p className="mb-3 text-xs font-bold tracking-[0.3em] text-white/60">
+                  ASA DIGITAL SPACE
+                </p>
 
-            </div>
+                <h2 className="text-4xl font-black tracking-tight md:text-6xl">
+                  Pilih Layanan
+                </h2>
 
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-7">
+                <p className="mt-4 text-white/65">
+                  Pilih layanan yang ingin kamu pesan.
+                </p>
 
-              {services.map((item) => {
+              </div>
 
-                const Icon = item.icon;
+              {/* SERVICE GRID */}
 
-                return (
+              <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
 
-                  <button
-                    key={item.id}
-                    onClick={() => setService(item.id)}
-                    className="
-                      card
-                      bg-base-200
-                      border
-                      border-base-300
-                      hover:border-primary
-                      hover:-translate-y-2
-                      hover:shadow-2xl
-                      transition-all
-                      duration-300
-                      text-left
-                    "
-                  >
+                {services.map((item) => {
 
-                    <div className="card-body">
+                  const Icon = item.icon;
 
-                      <div
-                        className="
-                          w-16
-                          h-16
-                          rounded-2xl
-                          bg-primary
-                          text-primary-content
-                          flex
-                          items-center
-                          justify-center
-                        "
-                      >
-                        <Icon size={34} />
-                      </div>
+                  return (
 
-                      <h2 className="card-title text-2xl mt-4">
-                        {item.title}
-                      </h2>
+                    <button
+                      key={item.id}
+                      onClick={() => setService(item.id)}
+                      className="
+                        group
+                        text-left
+                        rounded-[2rem]
+                        border-2
+                        border-white/20
+                        bg-white/[0.10]
+                        p-1
+                        text-white
+                        backdrop-blur-xl
+                        shadow-[0_20px_60px_rgba(0,0,0,0.15)]
+                        transition-all
+                        duration-300
+                        hover:-translate-y-2
+                        hover:border-white/40
+                        hover:bg-white/[0.15]
+                        hover:shadow-[0_25px_70px_rgba(0,0,0,0.25)]
+                      "
+                    >
 
-                      <p className="opacity-70">
-                        {item.desc}
-                      </p>
+                      <div className="rounded-[1.7rem] p-6">
 
-                      <div className="card-actions mt-5">
+                        {/* ICON */}
 
-                        <div className="btn btn-primary btn-sm">
+                        <div
+                          className="
+                            flex
+                            h-16
+                            w-16
+                            items-center
+                            justify-center
+                            rounded-2xl
+                            border
+                            border-white/20
+                            bg-white/10
+                            text-white
+                            transition
+                            duration-300
+                            group-hover:scale-105
+                            group-hover:bg-white/20
+                          "
+                        >
+                          <Icon size={30} />
+                        </div>
 
-                          Mulai
+                        {/* TITLE */}
 
-                          <ArrowRight size={18} />
+                        <h2 className="mt-6 text-2xl font-black">
+                          {item.title}
+                        </h2>
+
+                        {/* DESCRIPTION */}
+
+                        <p className="mt-2 min-h-[48px] text-sm leading-relaxed text-white/60">
+                          {item.desc}
+                        </p>
+
+                        {/* BUTTON */}
+
+                        <div className="mt-6 flex">
+
+                          <div
+                            className="
+                              flex
+                              items-center
+                              gap-2
+                              rounded-xl
+                              border
+                              border-white/20
+                              bg-white/10
+                              px-4
+                              py-2.5
+                              text-sm
+                              font-bold
+                              text-white
+                              transition
+                              group-hover:bg-white
+                              group-hover:text-[#073e87]
+                            "
+                          >
+                            Mulai
+
+                            <ArrowRight size={17} />
+
+                          </div>
 
                         </div>
 
                       </div>
 
-                    </div>
+                    </button>
 
-                  </button>
+                  );
 
-                );
+                })}
 
-              })}
+              </div>
 
             </div>
 
+          </section>
+
+        )}
+
+        {/* ======================================
+            FOOTER
+        ====================================== */}
+
+        <footer className="px-5 pb-8">
+
+          <div className="mx-auto max-w-6xl text-center">
+
+            <div className="mb-6 h-px bg-white/15" />
+
+            <p className="text-sm font-bold tracking-widest">
+              ASA DIGITAL SPACE
+            </p>
+
+            <p className="mt-2 text-xs text-white/45">
+              Dream, Imagine, and Make it True!
+            </p>
+
           </div>
 
-        </section>
+        </footer>
 
-      )}
+      </div>
 
     </main>
   );
