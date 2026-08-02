@@ -1,7 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, Send } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Send,
+  Check,
+} from "lucide-react";
 import { sendWhatsApp } from "@/lib/whatsapp";
 
 const VIDEO_TYPES = [
@@ -84,65 +89,165 @@ export default function VideoForm() {
   };
 
   return (
-    <div className="card bg-base-200 border border-base-300 shadow-xl">
-      <div className="card-body">
+    <div className="relative overflow-hidden rounded-[2rem] border-2 border-white/20 bg-white/[0.10] shadow-[0_25px_80px_rgba(0,0,0,0.2)] backdrop-blur-2xl">
 
-        {/* HEADER */}
-        <div>
-          <h2 className="text-3xl font-black">
-             Edit Video
+      {/* =========================================
+          DECORATIVE GLOW
+      ========================================= */}
+
+      <div className="pointer-events-none absolute -right-32 -top-32 h-72 w-72 rounded-full bg-cyan-400/10 blur-[100px]" />
+
+      <div className="pointer-events-none absolute -bottom-32 -left-32 h-72 w-72 rounded-full bg-blue-400/10 blur-[100px]" />
+
+      <div className="relative z-10 p-6 md:p-10">
+
+        {/* =========================================
+            HEADER
+        ========================================= */}
+
+        <div className="mb-8">
+
+          <div className="mb-4 inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold tracking-[0.2em] text-white/70 backdrop-blur-md">
+            VIDEO EDITING
+          </div>
+
+          <h2 className="text-3xl font-black tracking-tight md:text-4xl">
+            Edit Video
           </h2>
 
-          <p className="opacity-70 mt-2">
+          <p className="mt-2 text-sm leading-relaxed text-white/60 md:text-base">
             Isi form reservasi jasa edit video kamu.
           </p>
+
         </div>
 
-        {/* STEPPER */}
-        <ul className="steps steps-horizontal w-full my-6">
-          <li
-            className={`step ${
-              step >= 1 ? "step-primary" : ""
-            }`}
-          >
-            Informasi
-          </li>
+        {/* =========================================
+            STEPPER
+        ========================================= */}
 
-          <li
-            className={`step ${
-              step >= 2 ? "step-primary" : ""
-            }`}
-          >
-            Detail
-          </li>
+        <div className="mb-10">
 
-          <li
-            className={`step ${
-              step >= 3 ? "step-primary" : ""
-            }`}
-          >
-            Review
-          </li>
-        </ul>
+          <div className="grid grid-cols-3 gap-2">
 
-        {/* ========================================= */}
-        {/* STEP 1 */}
-        {/* ========================================= */}
+            {/* STEP 1 */}
+
+            <div
+              className={`rounded-xl border p-3 text-center transition-all ${
+                step >= 1
+                  ? "border-white/30 bg-white/15"
+                  : "border-white/10 bg-white/[0.05]"
+              }`}
+            >
+              <div
+                className={`mx-auto mb-2 flex h-8 w-8 items-center justify-center rounded-full text-xs font-black ${
+                  step >= 1
+                    ? "bg-white text-[#073e87]"
+                    : "bg-white/10 text-white/50"
+                }`}
+              >
+                1
+              </div>
+
+              <p
+                className={`text-xs font-bold md:text-sm ${
+                  step >= 1 ? "text-white" : "text-white/40"
+                }`}
+              >
+                Informasi
+              </p>
+            </div>
+
+            {/* STEP 2 */}
+
+            <div
+              className={`rounded-xl border p-3 text-center transition-all ${
+                step >= 2
+                  ? "border-white/30 bg-white/15"
+                  : "border-white/10 bg-white/[0.05]"
+              }`}
+            >
+              <div
+                className={`mx-auto mb-2 flex h-8 w-8 items-center justify-center rounded-full text-xs font-black ${
+                  step >= 2
+                    ? "bg-white text-[#073e87]"
+                    : "bg-white/10 text-white/50"
+                }`}
+              >
+                2
+              </div>
+
+              <p
+                className={`text-xs font-bold md:text-sm ${
+                  step >= 2 ? "text-white" : "text-white/40"
+                }`}
+              >
+                Detail
+              </p>
+            </div>
+
+            {/* STEP 3 */}
+
+            <div
+              className={`rounded-xl border p-3 text-center transition-all ${
+                step >= 3
+                  ? "border-white/30 bg-white/15"
+                  : "border-white/10 bg-white/[0.05]"
+              }`}
+            >
+              <div
+                className={`mx-auto mb-2 flex h-8 w-8 items-center justify-center rounded-full text-xs font-black ${
+                  step >= 3
+                    ? "bg-white text-[#073e87]"
+                    : "bg-white/10 text-white/50"
+                }`}
+              >
+                3
+              </div>
+
+              <p
+                className={`text-xs font-bold md:text-sm ${
+                  step >= 3 ? "text-white" : "text-white/40"
+                }`}
+              >
+                Review
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* =========================================
+            STEP 1
+        ========================================= */}
 
         {step === 1 && (
-          <div className="space-y-6">
+          <div className="space-y-7">
 
             {/* NAMA */}
+
             <div>
-              <label className="label">
-                <span className="label-text font-semibold">
-                  Nama Panggilan
-                </span>
+              <label className="mb-2 block text-sm font-bold text-white/90">
+                Nama Panggilan
               </label>
 
               <input
                 type="text"
-                className="input input-bordered w-full"
+                className="
+                  w-full
+                  rounded-xl
+                  border
+                  border-white/20
+                  bg-white/[0.08]
+                  px-4
+                  py-3
+                  text-white
+                  outline-none
+                  placeholder:text-white/30
+                  transition
+                  focus:border-white/50
+                  focus:bg-white/[0.12]
+                "
                 placeholder="Contoh: Ahmad"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -150,16 +255,29 @@ export default function VideoForm() {
             </div>
 
             {/* NOMOR WHATSAPP */}
+
             <div>
-              <label className="label">
-                <span className="label-text font-semibold">
-                  Nomor WhatsApp
-                </span>
+              <label className="mb-2 block text-sm font-bold text-white/90">
+                Nomor WhatsApp
               </label>
 
               <input
                 type="tel"
-                className="input input-bordered w-full"
+                className="
+                  w-full
+                  rounded-xl
+                  border
+                  border-white/20
+                  bg-white/[0.08]
+                  px-4
+                  py-3
+                  text-white
+                  outline-none
+                  placeholder:text-white/30
+                  transition
+                  focus:border-white/50
+                  focus:bg-white/[0.12]
+                "
                 placeholder="Contoh: 08123456789"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
@@ -167,217 +285,358 @@ export default function VideoForm() {
             </div>
 
             {/* PAKET */}
-            <div>
-              <label className="label">
-                <span className="label-text font-semibold">
-                  Paket
-                </span>
-              </label>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {PACKAGES.map((item) => (
-                  <button
-                    key={item}
-                    type="button"
-                    onClick={() => setSelectedPackage(item)}
-                    className={`card border transition-all ${
-                      selectedPackage === item
-                        ? "border-primary bg-primary text-primary-content"
-                        : "border-base-300 bg-base-100 hover:border-primary"
-                    }`}
-                  >
-                    <div className="card-body p-5 items-center">
-                      <p className="font-semibold">
-                        {item}
-                      </p>
-                    </div>
-                  </button>
-                ))}
+            <div>
+
+              <div className="mb-3 flex items-center justify-between">
+
+                <label className="text-sm font-bold text-white/90">
+                  Paket
+                </label>
+
               </div>
+
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+
+                {PACKAGES.map((item) => {
+
+                  const isSelected = selectedPackage === item;
+
+                  return (
+                    <button
+                      key={item}
+                      type="button"
+                      onClick={() => setSelectedPackage(item)}
+                      className={`
+                        rounded-2xl
+                        border-2
+                        p-5
+                        text-center
+                        font-bold
+                        transition-all
+                        duration-300
+                        ${
+                          isSelected
+                            ? "border-white bg-white text-[#073e87] shadow-lg"
+                            : "border-white/15 bg-white/[0.06] text-white hover:border-white/35 hover:bg-white/10"
+                        }
+                      `}
+                    >
+                      {item}
+                    </button>
+                  );
+
+                })}
+
+              </div>
+
             </div>
 
             {/* JENIS VIDEO */}
+
             <div>
-              <label className="label">
-                <span className="label-text font-semibold">
-                  Jenis Video
-                </span>
+
+              <label className="mb-3 block text-sm font-bold text-white/90">
+                Jenis Video
               </label>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {VIDEO_TYPES.map((item) => (
-                  <button
-                    key={item}
-                    type="button"
-                    onClick={() => setVideoType(item)}
-                    className={`card border transition-all ${
-                      videoType === item
-                        ? "border-primary bg-primary text-primary-content"
-                        : "border-base-300 bg-base-100 hover:border-primary"
-                    }`}
-                  >
-                    <div className="card-body p-4 items-center">
-                      <p className="font-semibold text-center">
-                        {item}
-                      </p>
-                    </div>
-                  </button>
-                ))}
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+
+                {VIDEO_TYPES.map((item) => {
+
+                  const isSelected = videoType === item;
+
+                  return (
+                    <button
+                      key={item}
+                      type="button"
+                      onClick={() => setVideoType(item)}
+                      className={`
+                        rounded-xl
+                        border
+                        px-4
+                        py-3.5
+                        text-sm
+                        font-semibold
+                        transition-all
+                        duration-300
+                        ${
+                          isSelected
+                            ? "border-white bg-white text-[#073e87]"
+                            : "border-white/15 bg-white/[0.06] text-white/80 hover:border-white/35 hover:bg-white/10"
+                        }
+                      `}
+                    >
+                      {item}
+                    </button>
+                  );
+
+                })}
+
               </div>
+
             </div>
 
           </div>
         )}
 
-        {/* ========================================= */}
-        {/* STEP 2 */}
-        {/* ========================================= */}
+        {/* =========================================
+            STEP 2
+        ========================================= */}
 
         {step === 2 && (
-          <div className="space-y-6">
+          <div className="space-y-7">
 
             {/* DURASI */}
+
             <div>
-              <label className="label">
-                <span className="label-text font-semibold">
-                  Durasi Video
-                </span>
+
+              <label className="mb-2 block text-sm font-bold text-white/90">
+                Durasi Video
               </label>
 
-              <div className="join w-full">
+              <div className="flex">
+
                 <input
                   type="number"
                   min="1"
-                  className="input input-bordered join-item w-full"
+                  className="
+                    min-w-0
+                    flex-1
+                    rounded-l-xl
+                    border
+                    border-r-0
+                    border-white/20
+                    bg-white/[0.08]
+                    px-4
+                    py-3
+                    text-white
+                    outline-none
+                    placeholder:text-white/30
+                    focus:border-white/50
+                  "
                   placeholder="Contoh: 10"
                   value={duration}
                   onChange={(e) => setDuration(e.target.value)}
                 />
 
-                <div className="btn join-item no-animation">
+                <div className="flex items-center rounded-r-xl border border-white/20 bg-white/10 px-5 text-sm font-bold text-white/70">
                   Menit
                 </div>
+
               </div>
+
             </div>
 
             {/* DEADLINE */}
+
             <div>
-              <label className="label">
-                <span className="label-text font-semibold">
-                  Deadline
-                </span>
+
+              <label className="mb-2 block text-sm font-bold text-white/90">
+                Deadline
               </label>
 
               <input
                 type="datetime-local"
-                className="input input-bordered w-full"
+                className="
+                  w-full
+                  rounded-xl
+                  border
+                  border-white/20
+                  bg-white/[0.08]
+                  px-4
+                  py-3
+                  text-white
+                  outline-none
+                  transition
+                  focus:border-white/50
+                "
                 value={deadline}
                 onChange={(e) => setDeadline(e.target.value)}
               />
 
-              <p className="text-sm opacity-60 mt-2">
+              <p className="mt-2 text-xs text-white/45">
                 Tentukan tanggal dan jam deadline pengerjaan.
               </p>
+
             </div>
 
-            {/* KONSEP VIDEO */}
+            {/* KONSEP */}
+
             <div>
-              <label className="label">
-                <span className="label-text font-semibold">
-                  Konsep Video
-                </span>
+
+              <label className="mb-2 block text-sm font-bold text-white/90">
+                Konsep Video
               </label>
 
               <textarea
                 rows={6}
-                className="textarea textarea-bordered w-full"
+                className="
+                  w-full
+                  resize-none
+                  rounded-xl
+                  border
+                  border-white/20
+                  bg-white/[0.08]
+                  px-4
+                  py-3
+                  text-white
+                  outline-none
+                  placeholder:text-white/30
+                  transition
+                  focus:border-white/50
+                  focus:bg-white/[0.12]
+                "
                 placeholder="Jelaskan konsep atau gambaran video yang kamu inginkan..."
                 value={concept}
                 onChange={(e) => setConcept(e.target.value)}
               />
+
             </div>
 
             {/* REFERENSI */}
-            <div>
-              <label className="label">
-                <span className="label-text font-semibold">
-                  Referensi
-                </span>
 
-                <span className="label-text-alt opacity-60">
+            <div>
+
+              <div className="mb-2 flex items-center justify-between">
+
+                <label className="text-sm font-bold text-white/90">
+                  Referensi
+                </label>
+
+                <span className="text-xs text-white/40">
                   Opsional
                 </span>
-              </label>
+
+              </div>
 
               <input
                 type="url"
-                className="input input-bordered w-full"
+                className="
+                  w-full
+                  rounded-xl
+                  border
+                  border-white/20
+                  bg-white/[0.08]
+                  px-4
+                  py-3
+                  text-white
+                  outline-none
+                  placeholder:text-white/30
+                  transition
+                  focus:border-white/50
+                "
                 placeholder="https://youtube.com/... atau link lainnya"
                 value={reference}
                 onChange={(e) => setReference(e.target.value)}
               />
+
             </div>
 
             {/* GOOGLE DRIVE */}
-            <div>
-              <label className="label">
-                <span className="label-text font-semibold">
-                  Google Drive
-                </span>
 
-                <span className="label-text-alt opacity-60">
+            <div>
+
+              <div className="mb-2 flex items-center justify-between">
+
+                <label className="text-sm font-bold text-white/90">
+                  Google Drive
+                </label>
+
+                <span className="text-xs text-white/40">
                   File bahan
                 </span>
-              </label>
+
+              </div>
 
               <input
                 type="url"
-                className="input input-bordered w-full"
+                className="
+                  w-full
+                  rounded-xl
+                  border
+                  border-white/20
+                  bg-white/[0.08]
+                  px-4
+                  py-3
+                  text-white
+                  outline-none
+                  placeholder:text-white/30
+                  transition
+                  focus:border-white/50
+                "
                 placeholder="https://drive.google.com/..."
                 value={driveLink}
                 onChange={(e) => setDriveLink(e.target.value)}
               />
 
-              <p className="text-sm opacity-60 mt-2">
+              <p className="mt-2 text-xs text-white/45">
                 Masukkan link Google Drive yang berisi bahan video.
               </p>
+
             </div>
 
-            {/* REQUEST / CATATAN */}
-            <div>
-              <label className="label">
-                <span className="label-text font-semibold">
-                  Request / Catatan Tambahan
-                </span>
+            {/* REQUEST */}
 
-                <span className="label-text-alt opacity-60">
+            <div>
+
+              <div className="mb-2 flex items-center justify-between">
+
+                <label className="text-sm font-bold text-white/90">
+                  Request / Catatan Tambahan
+                </label>
+
+                <span className="text-xs text-white/40">
                   Opsional
                 </span>
-              </label>
+
+              </div>
 
               <textarea
                 rows={5}
-                className="textarea textarea-bordered w-full"
+                className="
+                  w-full
+                  resize-none
+                  rounded-xl
+                  border
+                  border-white/20
+                  bg-white/[0.08]
+                  px-4
+                  py-3
+                  text-white
+                  outline-none
+                  placeholder:text-white/30
+                  transition
+                  focus:border-white/50
+                  focus:bg-white/[0.12]
+                "
                 placeholder="Contoh: gunakan lagu tertentu, style editing tertentu, text tertentu, dll..."
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
               />
+
             </div>
 
             {/* ADD ON */}
-            <div>
-              <label className="label">
-                <span className="label-text font-semibold">
-                  Add On
-                </span>
 
-                <span className="label-text-alt opacity-60">
+            <div>
+
+              <div className="mb-3 flex items-center justify-between">
+
+                <label className="text-sm font-bold text-white/90">
+                  Add On
+                </label>
+
+                <span className="text-xs text-white/40">
                   Bisa pilih lebih dari satu
                 </span>
-              </label>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              </div>
+
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+
                 {ADD_ONS.map((addon) => {
+
                   const isSelected = selectedAddOns.includes(addon);
 
                   return (
@@ -385,230 +644,323 @@ export default function VideoForm() {
                       key={addon}
                       type="button"
                       onClick={() => toggleAddOn(addon)}
-                      className={`card border transition-all ${
-                        isSelected
-                          ? "border-primary bg-primary text-primary-content"
-                          : "border-base-300 bg-base-100 hover:border-primary"
-                      }`}
+                      className={`
+                        relative
+                        rounded-2xl
+                        border-2
+                        p-5
+                        text-center
+                        font-bold
+                        transition-all
+                        duration-300
+                        ${
+                          isSelected
+                            ? "border-white bg-white text-[#073e87]"
+                            : "border-white/15 bg-white/[0.06] text-white hover:border-white/35 hover:bg-white/10"
+                        }
+                      `}
                     >
-                      <div className="card-body p-4 items-center">
-                        <p className="font-semibold text-center">
-                          {addon}
-                        </p>
-                      </div>
+
+                      {isSelected && (
+                        <span className="absolute right-3 top-3">
+                          <Check size={16} />
+                        </span>
+                      )}
+
+                      {addon}
+
                     </button>
                   );
+
                 })}
+
               </div>
 
-              <p className="text-sm opacity-60 mt-2">
+              <p className="mt-2 text-xs text-white/45">
                 Pilih add on yang kamu butuhkan.
               </p>
+
             </div>
 
           </div>
         )}
 
-        {/* ========================================= */}
-        {/* STEP 3 - REVIEW */}
-        {/* ========================================= */}
+        {/* =========================================
+            STEP 3
+        ========================================= */}
 
         {step === 3 && (
           <div className="space-y-5">
 
-            <div className="card bg-base-100 border border-base-300">
-              <div className="card-body">
+            <div className="mb-6">
 
-                <h3 className="card-title text-xl">
-                  📋 Review Reservasi
-                </h3>
-
-                <div className="divider my-1" />
-
-                <div className="space-y-4">
-
-                  {/* NAMA */}
-                  <div className="flex justify-between gap-4">
-                    <span className="opacity-70">
-                      Nama
-                    </span>
-
-                    <span className="font-semibold text-right">
-                      {name}
-                    </span>
-                  </div>
-
-                  {/* WHATSAPP */}
-                  <div className="flex justify-between gap-4">
-                    <span className="opacity-70">
-                      Nomor WhatsApp
-                    </span>
-
-                    <span className="font-semibold text-right">
-                      {phone}
-                    </span>
-                  </div>
-
-                  {/* PAKET */}
-                  <div className="flex justify-between gap-4">
-                    <span className="opacity-70">
-                      Paket
-                    </span>
-
-                    <span className="badge badge-primary">
-                      {selectedPackage}
-                    </span>
-                  </div>
-
-                  {/* JENIS VIDEO */}
-                  <div className="flex justify-between gap-4">
-                    <span className="opacity-70">
-                      Jenis Video
-                    </span>
-
-                    <span className="font-semibold text-right">
-                      {videoType}
-                    </span>
-                  </div>
-
-                  {/* DURASI */}
-                  <div className="flex justify-between gap-4">
-                    <span className="opacity-70">
-                      Durasi
-                    </span>
-
-                    <span className="font-semibold text-right">
-                      {duration} menit
-                    </span>
-                  </div>
-
-                  {/* DEADLINE */}
-                  <div className="flex justify-between gap-4">
-                    <span className="opacity-70">
-                      Deadline
-                    </span>
-
-                    <span className="font-semibold text-right">
-                      {deadline}
-                    </span>
-                  </div>
-
-                  {/* KONSEP */}
-                  <div>
-                    <p className="font-semibold mb-1">
-                      Konsep Video
-                    </p>
-
-                    <p className="opacity-70 whitespace-pre-wrap">
-                      {concept}
-                    </p>
-                  </div>
-
-                  {/* REFERENSI */}
-                  <div>
-                    <p className="font-semibold mb-1">
-                      Referensi
-                    </p>
-
-                    <p className="opacity-70 break-all">
-                      {reference || "-"}
-                    </p>
-                  </div>
-
-                  {/* GOOGLE DRIVE */}
-                  <div>
-                    <p className="font-semibold mb-1">
-                      Google Drive
-                    </p>
-
-                    <p className="opacity-70 break-all">
-                      {driveLink}
-                    </p>
-                  </div>
-
-                  {/* REQUEST */}
-                  <div>
-                    <p className="font-semibold mb-1">
-                      Request / Catatan Tambahan
-                    </p>
-
-                    <p className="opacity-70 whitespace-pre-wrap">
-                      {notes || "-"}
-                    </p>
-                  </div>
-
-                  {/* ADD ON */}
-                  <div>
-                    <p className="font-semibold mb-1">
-                      Add On
-                    </p>
-
-                    {selectedAddOns.length > 0 ? (
-                      <div className="flex flex-wrap gap-2">
-                        {selectedAddOns.map((addon) => (
-                          <span
-                            key={addon}
-                            className="badge badge-primary"
-                          >
-                            {addon}
-                          </span>
-                        ))}
-                      </div>
-                    ) : (
-                      <p className="opacity-70">
-                        Tidak ada
-                      </p>
-                    )}
-                  </div>
-
-                </div>
-
+              <div className="mb-3 inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold tracking-widest text-white/60">
+                FINAL REVIEW
               </div>
+
+              <h3 className="text-2xl font-black md:text-3xl">
+                Review Reservasi
+              </h3>
+
+              <p className="mt-2 text-sm text-white/55">
+                Pastikan semua data sudah benar sebelum dikirim.
+              </p>
+
             </div>
 
-            <div className="alert alert-info">
-              <span>
-                Setelah kamu mengisi form ini, maka kami akan
-                mengirimkan perkiraan biaya jasa editing kami ✨
-              </span>
+            <div className="space-y-1 rounded-2xl border border-white/15 bg-black/10 p-5 md:p-7">
+
+              {/* NAMA */}
+
+              <div className="flex justify-between gap-5 border-b border-white/10 py-4">
+
+                <span className="text-sm text-white/50">
+                  Nama
+                </span>
+
+                <span className="text-right text-sm font-bold">
+                  {name}
+                </span>
+
+              </div>
+
+              {/* WHATSAPP */}
+
+              <div className="flex justify-between gap-5 border-b border-white/10 py-4">
+
+                <span className="text-sm text-white/50">
+                  Nomor WhatsApp
+                </span>
+
+                <span className="text-right text-sm font-bold">
+                  {phone}
+                </span>
+
+              </div>
+
+              {/* PAKET */}
+
+              <div className="flex justify-between gap-5 border-b border-white/10 py-4">
+
+                <span className="text-sm text-white/50">
+                  Paket
+                </span>
+
+                <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-[#073e87]">
+                  {selectedPackage}
+                </span>
+
+              </div>
+
+              {/* JENIS VIDEO */}
+
+              <div className="flex justify-between gap-5 border-b border-white/10 py-4">
+
+                <span className="text-sm text-white/50">
+                  Jenis Video
+                </span>
+
+                <span className="text-right text-sm font-bold">
+                  {videoType}
+                </span>
+
+              </div>
+
+              {/* DURASI */}
+
+              <div className="flex justify-between gap-5 border-b border-white/10 py-4">
+
+                <span className="text-sm text-white/50">
+                  Durasi
+                </span>
+
+                <span className="text-right text-sm font-bold">
+                  {duration} menit
+                </span>
+
+              </div>
+
+              {/* DEADLINE */}
+
+              <div className="flex justify-between gap-5 border-b border-white/10 py-4">
+
+                <span className="text-sm text-white/50">
+                  Deadline
+                </span>
+
+                <span className="text-right text-sm font-bold">
+                  {deadline}
+                </span>
+
+              </div>
+
+              {/* KONSEP */}
+
+              <div className="border-b border-white/10 py-4">
+
+                <p className="mb-2 text-sm text-white/50">
+                  Konsep Video
+                </p>
+
+                <p className="whitespace-pre-wrap text-sm leading-relaxed text-white/85">
+                  {concept}
+                </p>
+
+              </div>
+
+              {/* REFERENSI */}
+
+              <div className="border-b border-white/10 py-4">
+
+                <p className="mb-2 text-sm text-white/50">
+                  Referensi
+                </p>
+
+                <p className="break-all text-sm text-white/85">
+                  {reference || "-"}
+                </p>
+
+              </div>
+
+              {/* DRIVE */}
+
+              <div className="border-b border-white/10 py-4">
+
+                <p className="mb-2 text-sm text-white/50">
+                  Google Drive
+                </p>
+
+                <p className="break-all text-sm text-white/85">
+                  {driveLink}
+                </p>
+
+              </div>
+
+              {/* CATATAN */}
+
+              <div className="border-b border-white/10 py-4">
+
+                <p className="mb-2 text-sm text-white/50">
+                  Request / Catatan Tambahan
+                </p>
+
+                <p className="whitespace-pre-wrap text-sm leading-relaxed text-white/85">
+                  {notes || "-"}
+                </p>
+
+              </div>
+
+              {/* ADD ON */}
+
+              <div className="py-4">
+
+                <p className="mb-3 text-sm text-white/50">
+                  Add On
+                </p>
+
+                {selectedAddOns.length > 0 ? (
+
+                  <div className="flex flex-wrap gap-2">
+
+                    {selectedAddOns.map((addon) => (
+                      <span
+                        key={addon}
+                        className="rounded-full bg-white px-3 py-1.5 text-xs font-bold text-[#073e87]"
+                      >
+                        {addon}
+                      </span>
+                    ))}
+
+                  </div>
+
+                ) : (
+
+                  <p className="text-sm text-white/60">
+                    Tidak ada
+                  </p>
+
+                )}
+
+              </div>
+
+            </div>
+
+            {/* INFO */}
+
+            <div className="rounded-2xl border border-cyan-300/20 bg-cyan-300/10 p-4 text-sm leading-relaxed text-white/80">
+              Setelah kamu mengisi form ini, maka kami akan
+              mengirimkan perkiraan biaya jasa editing kami ✨
             </div>
 
           </div>
         )}
 
-        {/* ========================================= */}
-        {/* NAVIGATION */}
-        {/* ========================================= */}
+        {/* =========================================
+            NAVIGATION
+        ========================================= */}
 
-        <div className="divider" />
-
-        <div className="flex justify-between gap-3">
+        <div className="mt-10 flex items-center justify-between gap-3 border-t border-white/10 pt-6">
 
           {/* BACK */}
+
           <button
             type="button"
-            className="btn btn-outline"
             disabled={step === 1}
             onClick={prevStep}
+            className="
+              flex
+              items-center
+              gap-2
+              rounded-xl
+              border
+              border-white/20
+              bg-white/10
+              px-4
+              py-3
+              text-sm
+              font-bold
+              text-white
+              transition
+              hover:bg-white/20
+              disabled:cursor-not-allowed
+              disabled:opacity-30
+            "
           >
             <ChevronLeft size={18} />
             Kembali
           </button>
 
           {/* NEXT */}
+
           {step < 3 ? (
+
             <button
               type="button"
-              className="btn btn-primary"
               onClick={nextStep}
+              className="
+                flex
+                items-center
+                gap-2
+                rounded-xl
+                bg-white
+                px-5
+                py-3
+                text-sm
+                font-black
+                text-[#073e87]
+                transition
+                hover:-translate-y-0.5
+                hover:bg-white/90
+              "
             >
               Lanjut
               <ChevronRight size={18} />
             </button>
+
           ) : (
+
             <button
               type="button"
-              className="btn btn-primary"
               onClick={() =>
                 sendWhatsApp({
                   service: "Edit Video",
@@ -630,15 +982,32 @@ export default function VideoForm() {
                   },
                 })
               }
+              className="
+                flex
+                items-center
+                gap-2
+                rounded-xl
+                bg-white
+                px-5
+                py-3
+                text-sm
+                font-black
+                text-[#073e87]
+                transition
+                hover:-translate-y-0.5
+                hover:bg-white/90
+              "
             >
               <Send size={18} />
               Kirim ke WhatsApp
             </button>
+
           )}
 
         </div>
 
       </div>
+
     </div>
   );
 }
