@@ -28,10 +28,13 @@ const PACKAGES = [
   "Basic",
   "Pro",
   "Ultimate",
+  "Custom",
 ];
 
 const ADD_ONS = [
-  "Subtitle",
+  "Subtitle Basic",
+  "Subtitle Pro",
+  "Subtitle Advance",
   "Fast Track",
   "Voice Over",
 ];
@@ -296,7 +299,7 @@ export default function VideoForm() {
 
               </div>
 
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
 
                 {PACKAGES.map((item) => {
 
@@ -633,7 +636,7 @@ export default function VideoForm() {
 
               </div>
 
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
 
                 {ADD_ONS.map((addon) => {
 
