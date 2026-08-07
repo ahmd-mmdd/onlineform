@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -42,6 +42,9 @@ const ADD_ONS = [
 export default function VideoForm() {
   const [step, setStep] = useState(1);
 
+  // Untuk auto scroll ke bagian atas form
+  const formTopRef = useRef<HTMLDivElement>(null);
+
   // Informasi customer
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -60,6 +63,19 @@ export default function VideoForm() {
 
   // Add On
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
+
+  // =========================================
+  // AUTO SCROLL SAAT PINDAH STEP
+  // =========================================
+
+  useEffect(() => {
+    if (step > 1) {
+      formTopRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [step]);
 
   const toggleAddOn = (addon: string) => {
     setSelectedAddOns((prev) =>
@@ -92,8 +108,10 @@ export default function VideoForm() {
   };
 
   return (
-    <div className="relative overflow-hidden rounded-[2rem] border-2 border-white/20 bg-white/[0.10] shadow-[0_25px_80px_rgba(0,0,0,0.2)] backdrop-blur-2xl">
-
+    <div
+      ref={formTopRef}
+      className="relative overflow-hidden rounded-[2rem] border-2 border-white/20 bg-white/[0.10] shadow-[0_25px_80px_rgba(0,0,0,0.2)] backdrop-blur-2xl"
+    >
       {/* =========================================
           DECORATIVE GLOW
       ========================================= */}
@@ -103,13 +121,11 @@ export default function VideoForm() {
       <div className="pointer-events-none absolute -bottom-32 -left-32 h-72 w-72 rounded-full bg-blue-400/10 blur-[100px]" />
 
       <div className="relative z-10 p-6 md:p-10">
-
         {/* =========================================
             HEADER
         ========================================= */}
 
         <div className="mb-8">
-
           <div className="mb-4 inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold tracking-[0.2em] text-white/70 backdrop-blur-md">
             VIDEO EDITING
           </div>
@@ -121,7 +137,6 @@ export default function VideoForm() {
           <p className="mt-2 text-sm leading-relaxed text-white/60 md:text-base">
             Isi form reservasi jasa edit video kamu.
           </p>
-
         </div>
 
         {/* =========================================
@@ -129,9 +144,7 @@ export default function VideoForm() {
         ========================================= */}
 
         <div className="mb-10">
-
           <div className="grid grid-cols-3 gap-2">
-
             {/* STEP 1 */}
 
             <div
@@ -148,7 +161,7 @@ export default function VideoForm() {
                     : "bg-white/10 text-white/50"
                 }`}
               >
-                1
+                {step > 1 ? <Check size={15} /> : "1"}
               </div>
 
               <p
@@ -176,7 +189,7 @@ export default function VideoForm() {
                     : "bg-white/10 text-white/50"
                 }`}
               >
-                2
+                {step > 2 ? <Check size={15} /> : "2"}
               </div>
 
               <p
@@ -215,9 +228,7 @@ export default function VideoForm() {
                 Review
               </p>
             </div>
-
           </div>
-
         </div>
 
         {/* =========================================
@@ -226,7 +237,6 @@ export default function VideoForm() {
 
         {step === 1 && (
           <div className="space-y-7">
-
             {/* NAMA */}
 
             <div>
@@ -290,19 +300,14 @@ export default function VideoForm() {
             {/* PAKET */}
 
             <div>
-
               <div className="mb-3 flex items-center justify-between">
-
                 <label className="text-sm font-bold text-white/90">
                   Paket
                 </label>
-
               </div>
 
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-
                 {PACKAGES.map((item) => {
-
                   const isSelected = selectedPackage === item;
 
                   return (
@@ -328,25 +333,19 @@ export default function VideoForm() {
                       {item}
                     </button>
                   );
-
                 })}
-
               </div>
-
             </div>
 
             {/* JENIS VIDEO */}
 
             <div>
-
               <label className="mb-3 block text-sm font-bold text-white/90">
                 Jenis Video
               </label>
 
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-
                 {VIDEO_TYPES.map((item) => {
-
                   const isSelected = videoType === item;
 
                   return (
@@ -373,13 +372,9 @@ export default function VideoForm() {
                       {item}
                     </button>
                   );
-
                 })}
-
               </div>
-
             </div>
-
           </div>
         )}
 
@@ -389,17 +384,14 @@ export default function VideoForm() {
 
         {step === 2 && (
           <div className="space-y-7">
-
             {/* DURASI */}
 
             <div>
-
               <label className="mb-2 block text-sm font-bold text-white/90">
                 Durasi Video
               </label>
 
               <div className="flex">
-
                 <input
                   type="number"
                   min="1"
@@ -426,15 +418,12 @@ export default function VideoForm() {
                 <div className="flex items-center rounded-r-xl border border-white/20 bg-white/10 px-5 text-sm font-bold text-white/70">
                   Menit
                 </div>
-
               </div>
-
             </div>
 
             {/* DEADLINE */}
 
             <div>
-
               <label className="mb-2 block text-sm font-bold text-white/90">
                 Deadline
               </label>
@@ -461,13 +450,11 @@ export default function VideoForm() {
               <p className="mt-2 text-xs text-white/45">
                 Tentukan tanggal dan jam deadline pengerjaan.
               </p>
-
             </div>
 
             {/* KONSEP */}
 
             <div>
-
               <label className="mb-2 block text-sm font-bold text-white/90">
                 Konsep Video
               </label>
@@ -494,15 +481,12 @@ export default function VideoForm() {
                 value={concept}
                 onChange={(e) => setConcept(e.target.value)}
               />
-
             </div>
 
             {/* REFERENSI */}
 
             <div>
-
               <div className="mb-2 flex items-center justify-between">
-
                 <label className="text-sm font-bold text-white/90">
                   Referensi
                 </label>
@@ -510,7 +494,6 @@ export default function VideoForm() {
                 <span className="text-xs text-white/40">
                   Opsional
                 </span>
-
               </div>
 
               <input
@@ -533,15 +516,12 @@ export default function VideoForm() {
                 value={reference}
                 onChange={(e) => setReference(e.target.value)}
               />
-
             </div>
 
             {/* GOOGLE DRIVE */}
 
             <div>
-
               <div className="mb-2 flex items-center justify-between">
-
                 <label className="text-sm font-bold text-white/90">
                   Google Drive
                 </label>
@@ -549,7 +529,6 @@ export default function VideoForm() {
                 <span className="text-xs text-white/40">
                   File bahan
                 </span>
-
               </div>
 
               <input
@@ -576,15 +555,12 @@ export default function VideoForm() {
               <p className="mt-2 text-xs text-white/45">
                 Masukkan link Google Drive yang berisi bahan video.
               </p>
-
             </div>
 
             {/* REQUEST */}
 
             <div>
-
               <div className="mb-2 flex items-center justify-between">
-
                 <label className="text-sm font-bold text-white/90">
                   Request / Catatan Tambahan
                 </label>
@@ -592,7 +568,6 @@ export default function VideoForm() {
                 <span className="text-xs text-white/40">
                   Opsional
                 </span>
-
               </div>
 
               <textarea
@@ -617,15 +592,12 @@ export default function VideoForm() {
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
               />
-
             </div>
 
             {/* ADD ON */}
 
             <div>
-
               <div className="mb-3 flex items-center justify-between">
-
                 <label className="text-sm font-bold text-white/90">
                   Add On
                 </label>
@@ -633,13 +605,10 @@ export default function VideoForm() {
                 <span className="text-xs text-white/40">
                   Bisa pilih lebih dari satu
                 </span>
-
               </div>
 
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-
                 {ADD_ONS.map((addon) => {
-
                   const isSelected = selectedAddOns.includes(addon);
 
                   return (
@@ -663,7 +632,6 @@ export default function VideoForm() {
                         }
                       `}
                     >
-
                       {isSelected && (
                         <span className="absolute right-3 top-3">
                           <Check size={16} />
@@ -671,20 +639,15 @@ export default function VideoForm() {
                       )}
 
                       {addon}
-
                     </button>
                   );
-
                 })}
-
               </div>
 
               <p className="mt-2 text-xs text-white/45">
                 Pilih add on yang kamu butuhkan.
               </p>
-
             </div>
-
           </div>
         )}
 
@@ -694,9 +657,7 @@ export default function VideoForm() {
 
         {step === 3 && (
           <div className="space-y-5">
-
             <div className="mb-6">
-
               <div className="mb-3 inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold tracking-widest text-white/60">
                 FINAL REVIEW
               </div>
@@ -708,15 +669,12 @@ export default function VideoForm() {
               <p className="mt-2 text-sm text-white/55">
                 Pastikan semua data sudah benar sebelum dikirim.
               </p>
-
             </div>
 
             <div className="space-y-1 rounded-2xl border border-white/15 bg-black/10 p-5 md:p-7">
-
               {/* NAMA */}
 
               <div className="flex justify-between gap-5 border-b border-white/10 py-4">
-
                 <span className="text-sm text-white/50">
                   Nama
                 </span>
@@ -724,13 +682,11 @@ export default function VideoForm() {
                 <span className="text-right text-sm font-bold">
                   {name}
                 </span>
-
               </div>
 
               {/* WHATSAPP */}
 
               <div className="flex justify-between gap-5 border-b border-white/10 py-4">
-
                 <span className="text-sm text-white/50">
                   Nomor WhatsApp
                 </span>
@@ -738,13 +694,11 @@ export default function VideoForm() {
                 <span className="text-right text-sm font-bold">
                   {phone}
                 </span>
-
               </div>
 
               {/* PAKET */}
 
               <div className="flex justify-between gap-5 border-b border-white/10 py-4">
-
                 <span className="text-sm text-white/50">
                   Paket
                 </span>
@@ -752,13 +706,11 @@ export default function VideoForm() {
                 <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-[#073e87]">
                   {selectedPackage}
                 </span>
-
               </div>
 
               {/* JENIS VIDEO */}
 
               <div className="flex justify-between gap-5 border-b border-white/10 py-4">
-
                 <span className="text-sm text-white/50">
                   Jenis Video
                 </span>
@@ -766,13 +718,11 @@ export default function VideoForm() {
                 <span className="text-right text-sm font-bold">
                   {videoType}
                 </span>
-
               </div>
 
               {/* DURASI */}
 
               <div className="flex justify-between gap-5 border-b border-white/10 py-4">
-
                 <span className="text-sm text-white/50">
                   Durasi
                 </span>
@@ -780,13 +730,11 @@ export default function VideoForm() {
                 <span className="text-right text-sm font-bold">
                   {duration} menit
                 </span>
-
               </div>
 
               {/* DEADLINE */}
 
               <div className="flex justify-between gap-5 border-b border-white/10 py-4">
-
                 <span className="text-sm text-white/50">
                   Deadline
                 </span>
@@ -794,13 +742,11 @@ export default function VideoForm() {
                 <span className="text-right text-sm font-bold">
                   {deadline}
                 </span>
-
               </div>
 
               {/* KONSEP */}
 
               <div className="border-b border-white/10 py-4">
-
                 <p className="mb-2 text-sm text-white/50">
                   Konsep Video
                 </p>
@@ -808,13 +754,11 @@ export default function VideoForm() {
                 <p className="whitespace-pre-wrap text-sm leading-relaxed text-white/85">
                   {concept}
                 </p>
-
               </div>
 
               {/* REFERENSI */}
 
               <div className="border-b border-white/10 py-4">
-
                 <p className="mb-2 text-sm text-white/50">
                   Referensi
                 </p>
@@ -822,13 +766,11 @@ export default function VideoForm() {
                 <p className="break-all text-sm text-white/85">
                   {reference || "-"}
                 </p>
-
               </div>
 
               {/* DRIVE */}
 
               <div className="border-b border-white/10 py-4">
-
                 <p className="mb-2 text-sm text-white/50">
                   Google Drive
                 </p>
@@ -836,13 +778,11 @@ export default function VideoForm() {
                 <p className="break-all text-sm text-white/85">
                   {driveLink}
                 </p>
-
               </div>
 
               {/* CATATAN */}
 
               <div className="border-b border-white/10 py-4">
-
                 <p className="mb-2 text-sm text-white/50">
                   Request / Catatan Tambahan
                 </p>
@@ -850,21 +790,17 @@ export default function VideoForm() {
                 <p className="whitespace-pre-wrap text-sm leading-relaxed text-white/85">
                   {notes || "-"}
                 </p>
-
               </div>
 
               {/* ADD ON */}
 
               <div className="py-4">
-
                 <p className="mb-3 text-sm text-white/50">
                   Add On
                 </p>
 
                 {selectedAddOns.length > 0 ? (
-
                   <div className="flex flex-wrap gap-2">
-
                     {selectedAddOns.map((addon) => (
                       <span
                         key={addon}
@@ -873,19 +809,13 @@ export default function VideoForm() {
                         {addon}
                       </span>
                     ))}
-
                   </div>
-
                 ) : (
-
                   <p className="text-sm text-white/60">
                     Tidak ada
                   </p>
-
                 )}
-
               </div>
-
             </div>
 
             {/* INFO */}
@@ -894,7 +824,6 @@ export default function VideoForm() {
               Setelah kamu mengisi form ini, maka kami akan
               mengirimkan perkiraan biaya jasa editing kami ✨
             </div>
-
           </div>
         )}
 
@@ -903,7 +832,6 @@ export default function VideoForm() {
         ========================================= */}
 
         <div className="mt-10 flex items-center justify-between gap-3 border-t border-white/10 pt-6">
-
           {/* BACK */}
 
           <button
@@ -936,7 +864,6 @@ export default function VideoForm() {
           {/* NEXT */}
 
           {step < 3 ? (
-
             <button
               type="button"
               onClick={nextStep}
@@ -959,9 +886,7 @@ export default function VideoForm() {
               Lanjut
               <ChevronRight size={18} />
             </button>
-
           ) : (
-
             <button
               type="button"
               onClick={() =>
@@ -1004,13 +929,9 @@ export default function VideoForm() {
               <Send size={18} />
               Kirim ke WhatsApp
             </button>
-
           )}
-
         </div>
-
       </div>
-
     </div>
   );
 }
